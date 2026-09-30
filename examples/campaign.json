@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "name": "Nightly board qualification",
+  "maxConcurrency": 2,
+  "resources": [
+    { "id": "rig-ice40-a", "capabilities": ["ice40", "power-supply", "logic-analyzer"] },
+    { "id": "rig-ice40-b", "capabilities": ["ice40", "power-supply", "serial"] },
+    { "id": "rig-esp32", "capabilities": ["esp32", "power-supply", "serial"] }
+  ],
+  "jobs": [
+    { "id": "build", "requires": { "any": ["ice40", "esp32"] } },
+    { "id": "flash-ice40", "dependsOn": ["build"], "requires": { "all": ["ice40"] }, "retries": 1 },
+    { "id": "power-check", "dependsOn": ["flash-ice40"], "requires": { "all": ["ice40", "power-supply"] } },
+    { "id": "protocol-check", "dependsOn": ["flash-ice40"], "requires": { "all": ["ice40", "logic-analyzer"] } }
+  ]
+}

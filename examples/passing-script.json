@@ -1,0 +1,6 @@
+{
+  "build": [{ "output": { "artifact": "firmware.bin" } }],
+  "flash-ice40": [{ "output": { "verified": true } }],
+  "power-check": [{ "output": { "voltage": 3.31 } }],
+  "protocol-check": [{ "output": { "frames": 12, "errors": 0 } }]
+}
